@@ -1,0 +1,24 @@
+name: Python Deployment Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+      
+    - name: Build and Run Docker Container
+      run: |
+        docker build -t hello-world-python .
+        docker run hello-world-python
